@@ -41,7 +41,7 @@ export const buildCodeSnippet = ({
   const similarSnippets =
     snippets.length > 1
       ? [
-          `\n  // Similar 👇🏼`,
+          `\n// Similar 👇🏼`,
           ...snippets.slice(1).map(
             (v) =>
               `  ${v
@@ -53,17 +53,10 @@ export const buildCodeSnippet = ({
         ]
       : [];
 
-  return {
-    prefix: [`1loc${name}`, `1loc${category.replace(/\s+/, "")}`],
-    body: [
-      `\${1:/**\n * ${title}`,
-      ` * ${credit}`,
-      ...similarSnippets,
-      "*/",
-      `}${snippets[0]}`,
-    ],
-    description: title,
-  };
+  return `snippet 1loc${name} "${title}"
+/* ${title} */
+${snippets[0]}${similarSnippets}
+endsnippet`
 };
 
 export const getLanguageSnippets = (snippetPaths) => {
@@ -72,7 +65,7 @@ export const getLanguageSnippets = (snippetPaths) => {
       const snippetLocation = snippetPath.split("/").slice(-2).join("/");
       const md = fs.readFileSync(snippetPath, "utf-8");
 
-      const result = { js: {}, ts: {} };
+      const result = { js: "", ts: "" };
 
       const { title, category } = parseMdTitleNCategory(md);
       const purifiedMd = purifyMd(md);
@@ -84,14 +77,14 @@ export const getLanguageSnippets = (snippetPaths) => {
         purifySnippet(snippetsFromMd(purifiedMd, "typescript"), "ts")
       );
 
-      result.js[title] = buildCodeSnippet({
+      result.js = buildCodeSnippet({
         title,
         category,
         ...jsSnippet,
         credit: addCredit(snippetLocation),
       });
 
-      result.ts[title] = buildCodeSnippet({
+      result.ts = buildCodeSnippet({
         title,
         category,
         ...tsSnippet,
@@ -104,11 +97,10 @@ export const getLanguageSnippets = (snippetPaths) => {
       (prev, curr) => {
         const [jsSnippets, tsSnippets] = prev;
         return [
-          { ...jsSnippets, ...curr.js },
-          { ...tsSnippets, ...curr.ts },
+          jsSnippets + "\n\n" + curr.js,
+          tsSnippets + "\n\n" + curr.ts,
         ];
       },
-      [{}, {}]
+      ["", ""]
     )
-    .map((snippet) => JSON.stringify(snippet));
 };
