@@ -6,8 +6,8 @@ import {
 
 const SNIPPETS_PATH_PATTERN = "snippets/**/*.md";
 const ROOT_SNIPPETS_DIR = `${process.cwd()}/UltiSnips`;
-const JS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/javascript-1loc.snippets`;
-const TS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/typescript-1loc.snippets`;
+const JS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/javascript.snippets`;
+const TS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/typescript.snippets`;
 
 (async () => {
   try {
