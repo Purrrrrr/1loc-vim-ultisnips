@@ -53,7 +53,7 @@ export const buildCodeSnippet = ({
         ]
       : [];
 
-  return `snippet 1loc${name} "${title}"
+  return `snippet oneloc${name} "${title}"
 /* ${title} */
 ${snippets[0]}${similarSnippets}
 endsnippet`
