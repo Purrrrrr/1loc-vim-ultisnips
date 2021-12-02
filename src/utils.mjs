@@ -38,26 +38,21 @@ export const buildCodeSnippet = ({
   snippets,
   credit,
 }) => {
+  const [snippet, ...otherSnippets] = snippets.map(escapeSpecialChars)
   const similarSnippets =
-    snippets.length > 1
-      ? [
-          `\n// Similar 👇🏼`,
-          ...snippets.slice(1).map(
-            (v) =>
-              `  ${v
-                .replace(/\$/g, "\\$")
-                .replace(/\*\//g, "*\\/")
-                .replace(/}/g, "\\}")}`
-            // escape metacharacters that could interfere with VSCode placeholder
-          ),
-        ]
-      : [];
+    otherSnippets.length > 0
+      ? `\n// Similar: ${otherSnippets.join('  ')}`
+      : '';
 
   return `snippet oneloc${name} "${title}"
 /* ${title} */
-${snippets[0]}${similarSnippets}
+${snippet}${similarSnippets}
 endsnippet`
 };
+
+function escapeSpecialChars(code) {
+  return code.replace(/[$`{\\]/g, '\\$&')
+}
 
 export const getLanguageSnippets = (snippetPaths) => {
   return snippetPaths

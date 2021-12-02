@@ -13,7 +13,7 @@ endsnippet
 snippet onelocclone "Clone an array"
 /* Clone an array */
 const clone = <T,_>(arr: T[]): T[] => arr.slice(0)
-// Similar 👇🏼,  const clone = <T,_>(arr: T[]): T[] => [...arr],  const clone = <T,_>(arr: T[]): T[] => Array.from(arr),  const clone = <T,_>(arr: T[]): T[] => arr.map((x) => x),  const clone = <T,_>(arr: T[]): T[] => JSON.parse(JSON.stringify(arr)),  const clone = <T,_>(arr: T[]): T[] => arr.concat([]);
+// Similar: const clone = <T,_>(arr: T[]): T[] => [...arr]  const clone = <T,_>(arr: T[]): T[] => Array.from(arr)  const clone = <T,_>(arr: T[]): T[] => arr.map((x) => x)  const clone = <T,_>(arr: T[]): T[] => JSON.parse(JSON.stringify(arr))  const clone = <T,_>(arr: T[]): T[] => arr.concat([]);
 endsnippet
 
 snippet onelocisEqual "Compare two arrays regardless of order"
@@ -24,47 +24,47 @@ endsnippet
 snippet onelocisEqual "Compare two arrays"
 /* Compare two arrays */
 const isEqual = <T,_>(a: T[], b: T[]): boolean => JSON.stringify(a) === JSON.stringify(b)
-// Similar 👇🏼,  const isEqual = <T,_>(a: T[], b: T[]): boolean => a.length === b.length && a.every((v, i) => v === b[i]);
+// Similar: const isEqual = <T,_>(a: T[], b: T[]): boolean => a.length === b.length && a.every((v, i) => v === b[i]);
 endsnippet
 
 snippet oneloctoObject "Convert an array of objects to a single object"
 /* Convert an array of objects to a single object */
-const toObject = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): Record<string, T> => (arr.reduce((a, b) => ({ ...a, [b[key]]: b }), {}))
-// Similar 👇🏼,  const toObject = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): Record<string, T> => (Object.fromEntries(arr.map((it) => [it[key], it])));
+const toObject = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): Record<string, T> => (arr.reduce((a, b) => (\{ ...a, [b[key]]: b }), \{}))
+// Similar: const toObject = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): Record<string, T> => (Object.fromEntries(arr.map((it) => [it[key], it])));
 endsnippet
 
 snippet oneloctoNumbers "Convert an array of strings to numbers"
 /* Convert an array of strings to numbers */
 const toNumbers = (arr: string[]): number[] => arr.map(Number)
-// Similar 👇🏼,  const toNumbers = (arr: string[]): number[] => arr.map((x) => +x);
+// Similar: const toNumbers = (arr: string[]): number[] => arr.map((x) => +x);
 endsnippet
 
 snippet oneloccountBy "Count by the properties of an array of objects"
 /* Count by the properties of an array of objects */
-const countBy = <T extends Record<string, string>, K extends keyof T>(arr: T[], prop: K): Record<string, number> => (arr.reduce((prev, curr) => ((prev[curr[prop]] = ++prev[curr[prop]] || 1), prev), {} as Record<string, number>));
+const countBy = <T extends Record<string, string>, K extends keyof T>(arr: T[], prop: K): Record<string, number> => (arr.reduce((prev, curr) => ((prev[curr[prop]] = ++prev[curr[prop]] || 1), prev), \{} as Record<string, number>));
 endsnippet
 
 snippet oneloccountOccurrences "Count the occurrences of a value in an array"
 /* Count the occurrences of a value in an array */
 const countOccurrences = <T,_>(arr: T[], val: T): number => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
-// Similar 👇🏼,  const countOccurrences = <T,_>(arr: T[], val: T): number => arr.filter((item) => item === val).length;
+// Similar: const countOccurrences = <T,_>(arr: T[], val: T): number => arr.filter((item) => item === val).length;
 endsnippet
 
 snippet oneloccountOccurrences "Count the occurrences of array elements"
 /* Count the occurrences of array elements */
-const countOccurrences = <T extends string | number,>(arr: T[]): Record<T, number> => (arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {}as Record<T, number>));
+const countOccurrences = <T extends string | number,>(arr: T[]): Record<T, number> => (arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), \{}as Record<T, number>));
 endsnippet
 
 snippet onelocaccumulate "Create an array of cumulative sum"
 /* Create an array of cumulative sum */
 const accumulate = (arr: number[]): number[] => arr.map(((sum) => (value: number) => (sum += value))(0))
-// Similar 👇🏼,  const accumulate = (arr: number[]): number[] => arr.reduce((a, b, i) => (i === 0 ? [b] : [...a, b + a[i - 1]]), [0]);
+// Similar: const accumulate = (arr: number[]): number[] => arr.reduce((a, b, i) => (i === 0 ? [b] : [...a, b + a[i - 1]]), [0]);
 endsnippet
 
 snippet onelocrange "Create an array of numbers in the given range"
 /* Create an array of numbers in the given range */
 const range = (min: number, max: number): number[] => [...Array(max - min + 1).keys()].map((i) => i + min)
-// Similar 👇🏼,  const range = (min: number, max: number): number[] => Array(max - min + 1).fill(0).map((_, i) => min + i),  const range = (min: number, max: number): number[] => Array.from({ length: max - min + 1 \}, (_, i) => min + i);
+// Similar: const range = (min: number, max: number): number[] => Array(max - min + 1).fill(0).map((_, i) => min + i)  const range = (min: number, max: number): number[] => Array.from(\{ length: max - min + 1 }, (_, i) => min + i);
 endsnippet
 
 snippet oneloccartesian "Create cartesian product"
@@ -80,13 +80,13 @@ endsnippet
 snippet onelocclosest "Find the closest number from an array"
 /* Find the closest number from an array */
 const closest = (arr: number[], n: number): number => arr.reduce((prev, curr) => (Math.abs(curr - n) < Math.abs(prev - n) ? curr : prev))
-// Similar 👇🏼,  const closest = (arr: number[], n: number): number => arr.sort((a, b) => Math.abs(a - n) - Math.abs(b - n))[0];
+// Similar: const closest = (arr: number[], n: number): number => arr.sort((a, b) => Math.abs(a - n) - Math.abs(b - n))[0];
 endsnippet
 
 snippet oneloclastIndex "Find the index of the last matching item of an array"
 /* Find the index of the last matching item of an array */
 const lastIndex = <T,_>(arr: T[], predicate: (a: T) => boolean): number => arr.reduce((prev, curr, index) => (predicate(curr) ? index : prev), -1)
-// Similar 👇🏼,  const lastIndex = <T,_>(arr: T[], predicate: (a: T) => boolean): number => arr.map((item) => predicate(item)).lastIndexOf(true);
+// Similar: const lastIndex = <T,_>(arr: T[], predicate: (a: T) => boolean): number => arr.map((item) => predicate(item)).lastIndexOf(true);
 endsnippet
 
 snippet onelocindexOfMax "Find the index of the maximum item of an array"
@@ -106,7 +106,7 @@ endsnippet
 
 snippet onelocmaxBy "Find the maximum item of an array by given key"
 /* Find the maximum item of an array by given key */
-const maxBy = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): T => (arr.reduce((a, b) => (a[key] >= b[key] ? a : b), {} as T));
+const maxBy = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): T => (arr.reduce((a, b) => (a[key] >= b[key] ? a : b), \{} as T));
 endsnippet
 
 snippet onelocmax "Find the maximum item of an array"
@@ -116,7 +116,7 @@ endsnippet
 
 snippet onelocminBy "Find the minimum item of an array by given key"
 /* Find the minimum item of an array by given key */
-const minBy = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): T => (arr.reduce((a, b) => (a[key] < b[key] ? a : b), {} as T));
+const minBy = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): T => (arr.reduce((a, b) => (a[key] < b[key] ? a : b), \{} as T));
 endsnippet
 
 snippet onelocmin "Find the minimum item of an array"
@@ -127,13 +127,13 @@ endsnippet
 snippet onelocflat "Flatten an array"
 /* Flatten an array */
 const flat = (arr) => [].concat.apply([], arr.map((a) => (Array.isArray(a) ? flat(a) : a)))
-// Similar 👇🏼,  const flat = (arr) => arr.reduce((a, b) => (Array.isArray(b) ? [...a, ...flat(b)] : [...a, b]), []),  const flat = (arr) => arr.flat();
+// Similar: const flat = (arr) => arr.reduce((a, b) => (Array.isArray(b) ? [...a, ...flat(b)] : [...a, b]), [])  const flat = (arr) => arr.flat();
 endsnippet
 
 snippet onelocalphabet: "Generate an array of alphabet characters"
 /* Generate an array of alphabet characters */
 const alphabet: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('')
-// Similar 👇🏼,  const alphabet: string[] = [...'abcdefghijklmnopqrstuvwxyz'],  const alphabet: string[] = Array(26).fill(0).map((_, i) => String.fromCharCode(i + 97)),  const alphabet: string[] = [...Array(26).keys()].map((i) => String.fromCharCode(i + 97)),  const alphabet: string[] = [...Array(26)].map((_, i) => (i + 10).toString(36)),  const alphabet: string[] = String.fromCharCode(...' '.repeat(26).split('').map((_, i) => i + 97)).split('');
+// Similar: const alphabet: string[] = [...'abcdefghijklmnopqrstuvwxyz']  const alphabet: string[] = Array(26).fill(0).map((_, i) => String.fromCharCode(i + 97))  const alphabet: string[] = [...Array(26).keys()].map((i) => String.fromCharCode(i + 97))  const alphabet: string[] = [...Array(26)].map((_, i) => (i + 10).toString(36))  const alphabet: string[] = String.fromCharCode(...' '.repeat(26).split('').map((_, i) => i + 97)).split('');
 endsnippet
 
 snippet onelocgetConsecutiveArrays "Get all arrays of consecutive elements"
@@ -154,7 +154,7 @@ endsnippet
 snippet onelocindices "Get indices of a value in an array"
 /* Get indices of a value in an array */
 const indices = <T,>(arr: T[], value: T): number[] => (arr.reduce((acc, v, i) => (v === value ? [...acc, i] : acc), [] as number[]))
-// Similar 👇🏼,  const indices = <T,>(arr: T[], value: T): number[] => (arr.map((v, i) => (v === value ? i : false)).filter(Boolean) as number[]);
+// Similar: const indices = <T,>(arr: T[], value: T): number[] => (arr.map((v, i) => (v === value ? i : false)).filter(Boolean) as number[]);
 endsnippet
 
 snippet onelocaverage "Get the average of an array"
@@ -180,7 +180,7 @@ endsnippet
 snippet onelocunique "Get the unique values of an array"
 /* Get the unique values of an array */
 const unique = <T,>(arr: T[]): T[] => [...new Set(arr)]
-// Similar 👇🏼,  const unique = <T,>(arr: T[]): T[] => arr.filter((el, i, array) => array.indexOf(el) === i),  const unique = <T,>(arr: T[]): T[] => arr.reduce((acc, el) => (acc.includes(el) ? acc : [...acc, el]), [] as T[]);
+// Similar: const unique = <T,>(arr: T[]): T[] => arr.filter((el, i, array) => array.indexOf(el) === i)  const unique = <T,>(arr: T[]): T[] => arr.reduce((acc, el) => (acc.includes(el) ? acc : [...acc, el]), [] as T[]);
 endsnippet
 
 snippet onelocunion "Get union of arrays"
@@ -190,13 +190,13 @@ endsnippet
 
 snippet onelocgroupBy "Group an array of objects by a key"
 /* Group an array of objects by a key */
-const groupBy = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): Record<string, T[]> => (arr.reduce((acc, item) => ((acc[item[key]] = [...(acc[item[key]] || []), item]), acc), {} as Record<string, T[]>));
+const groupBy = <T extends Record<string, any>, K extends keyof T>(arr: T[], key: K): Record<string, T[]> => (arr.reduce((acc, item) => ((acc[item[key]] = [...(acc[item[key]] || []), item]), acc), \{} as Record<string, T[]>));
 endsnippet
 
 snippet onelocmerge "Merge two arrays"
 /* Merge two arrays */
 const merge = <T,_>(a: T[], b: T[]): T[] => a.concat(b)
-// Similar 👇🏼,  const merge = <T,_>(a: T[], b: T[]): T[] => [...a, ...b],  const merge = <T,_>(a: T[], b: T[]): T[] => [...new Set(a.concat(b))],  const merge = <T,_>(a: T[], b: T[]): T[] => [...new Set([...a, ...b])];
+// Similar: const merge = <T,_>(a: T[], b: T[]): T[] => [...a, ...b]  const merge = <T,_>(a: T[], b: T[]): T[] => [...new Set(a.concat(b))]  const merge = <T,_>(a: T[], b: T[]): T[] => [...new Set([...a, ...b])];
 endsnippet
 
 snippet onelocpartition "Partition an array based on a condition"
@@ -217,13 +217,13 @@ endsnippet
 snippet onelocrepeat "Repeat an array"
 /* Repeat an array */
 const repeat = <T,_>(arr: T[], n: number): T[] => [].concat(...Array(n).fill(arr))
-// Similar 👇🏼,  const repeat = <T,_>(arr: T[], n: number): T[] => Array(n).fill(arr).flat(),  const repeat = <T,_>(arr: T[], n: number): T[] => Array(arr.length * n).fill(0).map((_, i) => arr[i % arr.length]),  const repeat = <T,_>(arr: T[], n: number): T[] => Array.from({ length: arr.length * n \}, (_, i) => arr[i % arr.length]);
+// Similar: const repeat = <T,_>(arr: T[], n: number): T[] => Array(n).fill(arr).flat()  const repeat = <T,_>(arr: T[], n: number): T[] => Array(arr.length * n).fill(0).map((_, i) => arr[i % arr.length])  const repeat = <T,_>(arr: T[], n: number): T[] => Array.from(\{ length: arr.length * n }, (_, i) => arr[i % arr.length]);
 endsnippet
 
 snippet onelocshuffle "Shuffle an array"
 /* Shuffle an array */
-const shuffle = <T,_>(arr: T[]): T[] => arr.map((a) => ({ sort: Math.random(), value: a })).sort((a, b) => a.sort - b.sort).map((a) => a.value)
-// Similar 👇🏼,  const shuffle = <T,_>(arr: T[]): T[] => arr.sort(() => 0.5 - Math.random());
+const shuffle = <T,_>(arr: T[]): T[] => arr.map((a) => (\{ sort: Math.random(), value: a })).sort((a, b) => a.sort - b.sort).map((a) => a.value)
+// Similar: const shuffle = <T,_>(arr: T[]): T[] => arr.sort(() => 0.5 - Math.random());
 endsnippet
 
 snippet onelocsortBy "Sort an array of items by given key"
@@ -244,7 +244,7 @@ endsnippet
 snippet oneloctranspose "Swap the rows and columns of a matrix"
 /* Swap the rows and columns of a matrix */
 const transpose = <T,>(matrix: T[][]): T[][] => matrix[0].map((col, i) => matrix.map((row) => row[i]))
-// Similar 👇🏼,  const transpose = <T,>(matrix: T[][]): T[][] => matrix[0].map((col, c) => matrix.map((row, r) => matrix[r][c])),  const transpose = <T,>(matrix: T[][]): T[][] => (matrix.reduce((prev, next) => next.map((item, i) => (prev[i] || []).concat(next[i])), [] as T[][]));
+// Similar: const transpose = <T,>(matrix: T[][]): T[][] => matrix[0].map((col, c) => matrix.map((row, r) => matrix[r][c]))  const transpose = <T,>(matrix: T[][]): T[][] => (matrix.reduce((prev, next) => next.map((item, i) => (prev[i] || []).concat(next[i])), [] as T[][]));
 endsnippet
 
 snippet onelocswapItems "Swap two array items"
@@ -254,17 +254,17 @@ endsnippet
 
 snippet onelocunzip "Unzip an array of arrays"
 /* Unzip an array of arrays */
-const unzip = (arr) => arr.reduce((acc, c) => (c.forEach((v, i) => acc[i].push(v)), acc), Array.from({ length: Math.max(...arr.map((a) => a.length)) }, (_) => []));
+const unzip = (arr) => arr.reduce((acc, c) => (c.forEach((v, i) => acc[i].push(v)), acc), Array.from(\{ length: Math.max(...arr.map((a) => a.length)) }, (_) => []));
 endsnippet
 
 snippet oneloczip "Zip multiple arrays"
 /* Zip multiple arrays */
-const zip = (...arr) => Array.from({ length: Math.max(...arr.map((a) => a.length)) }, (_, i) => arr.map((a) => a[i]));
+const zip = (...arr) => Array.from(\{ length: Math.max(...arr.map((a) => a.length)) }, (_, i) => arr.map((a) => a[i]));
 endsnippet
 
 snippet onelocsuffixAmPm "Add AM PM suffix to an hour"
 /* Add AM PM suffix to an hour */
-const suffixAmPm = (h: number): string => `${h % 12 === 0 ? 12 : h % 12}${h < 12 ? 'am' : 'pm'}`;
+const suffixAmPm = (h: number): string => \`\$\{h % 12 === 0 ? 12 : h % 12}\$\{h < 12 ? 'am' : 'pm'}\`;
 endsnippet
 
 snippet onelocdiffDays "Calculate the number of difference days between two dates"
@@ -290,7 +290,7 @@ endsnippet
 snippet onelocformatSeconds "Convert seconds to hh:mm:ss format"
 /* Convert seconds to hh:mm:ss format */
 const formatSeconds = (s: number): string => new Date(s * 1000).toISOString().substr(11, 8)
-// Similar 👇🏼,  const formatSeconds = (s: number): string => (new Date(s * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/) as string[])[0],  const formatSeconds = (s: number): string => ([parseInt(`\${s / 3600\}`), parseInt(`\${(s / 60) % 60\}`), parseInt(`\${s % 60\}`)].join(':').replace(/\b(\d)\b/g, '0\$1'));
+// Similar: const formatSeconds = (s: number): string => (new Date(s * 1000).toUTCString().match(/(\\d\\d:\\d\\d:\\d\\d)/) as string[])[0]  const formatSeconds = (s: number): string => ([parseInt(\`\$\{s / 3600}\`), parseInt(\`\$\{(s / 60) % 60}\`), parseInt(\`\$\{s % 60}\`)].join(':').replace(/\\b(\\d)\\b/g, '0\$1'));
 endsnippet
 
 snippet onelocextract "Extract year, month, day, hour, minute, second and millisecond from a date"
@@ -346,13 +346,13 @@ endsnippet
 snippet oneloctomorrow: "Get the tomorrow date"
 /* Get the tomorrow date */
 const tomorrow: Date = ((d) => new Date(d.setDate(d.getDate() + 1)))(new Date())
-// Similar 👇🏼,  const tomorrow: Date = new Date(new Date().valueOf() + 1000 * 60 * 60 * 24);
+// Similar: const tomorrow: Date = new Date(new Date().valueOf() + 1000 * 60 * 60 * 24);
 endsnippet
 
 snippet onelocnumberOfDays "Get the total number of days in a year"
 /* Get the total number of days in a year */
 const numberOfDays = (year: number): number => ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? 366 : 365)
-// Similar 👇🏼,  const numberOfDays = (year: number): number => (new Date(year, 1, 29).getDate() === 29 ? 366 : 365);
+// Similar: const numberOfDays = (year: number): number => (new Date(year, 1, 29).getDate() === 29 ? 366 : 365);
 endsnippet
 
 snippet onelocgetWeekday "Get the weekday of a date"
@@ -363,7 +363,7 @@ endsnippet
 snippet onelocyesterday: "Get the yesterday date"
 /* Get the yesterday date */
 const yesterday: Date = ((d) => new Date(d.setDate(d.getDate() - 1)))(new Date())
-// Similar 👇🏼,  const yesterday: Date = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24);
+// Similar: const yesterday: Date = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24);
 endsnippet
 
 snippet onelocmidnightOfToday "Initialize the current date but set time to midnight"
@@ -374,7 +374,7 @@ endsnippet
 snippet onelocsortDescending "Sort an array of dates"
 /* Sort an array of dates */
 const sortDescending = (arr: Date[]): Date[] => arr.sort((a, b) => a.getTime() - b.getTime())
-// Similar 👇🏼,  const sortAscending = (arr: Date[]): Date[] => arr.sort((a, b) => b.getTime() - a.getTime());
+// Similar: const sortAscending = (arr: Date[]): Date[] => arr.sort((a, b) => b.getTime() - a.getTime());
 endsnippet
 
 snippet onelocisDescendant "Check if an element is a descendant of another"
@@ -414,7 +414,7 @@ endsnippet
 
 snippet onelocgetPosition "Get the position of an element relative to the document"
 /* Get the position of an element relative to the document */
-const getPosition = (ele) => ((r = ele.getBoundingClientRect()), { left: r.left + window.scrollX, top: r.top + window.scrollY });
+const getPosition = (ele) => ((r = ele.getBoundingClientRect()), \{ left: r.left + window.scrollX, top: r.top + window.scrollY });
 endsnippet
 
 snippet onelocgetSelectedText "Get the selected text"
@@ -430,19 +430,19 @@ endsnippet
 snippet onelochide "Hide an element"
 /* Hide an element */
 const hide = (ele: HTMLElement): string => (ele.style.display = 'none')
-// Similar 👇🏼,  const hide = (ele: HTMLElement): string => (ele.style.visibility = 'hidden'),  const hide = (ele: HTMLElement): boolean => (ele.hidden = true);
+// Similar: const hide = (ele: HTMLElement): string => (ele.style.visibility = 'hidden')  const hide = (ele: HTMLElement): boolean => (ele.hidden = true);
 endsnippet
 
 snippet onelocinsertAfter "Insert an element after other one"
 /* Insert an element after other one */
 const insertAfter = (ele: Element, anotherEle: Element): Element | null => (anotherEle.parentNode ? anotherEle.parentNode.insertBefore(ele, anotherEle.nextSibling) : null)
-// Similar 👇🏼,  const insertAfter = (ele: Element, anotherEle: Element): Element | null => anotherEle.insertAdjacentElement('afterend', ele);
+// Similar: const insertAfter = (ele: Element, anotherEle: Element): Element | null => anotherEle.insertAdjacentElement('afterend', ele);
 endsnippet
 
 snippet onelocinsertBefore "Insert an element before other one"
 /* Insert an element before other one */
 const insertBefore = (ele: Element, anotherEle: Element): Element | null => (anotherEle.parentNode ? anotherEle.parentNode.insertBefore(ele, anotherEle) : null)
-// Similar 👇🏼,  const insertBefore = (ele: Element, anotherEle: Element) => anotherEle.insertAdjacentElement('beforebegin', ele);
+// Similar: const insertBefore = (ele: Element, anotherEle: Element) => anotherEle.insertAdjacentElement('beforebegin', ele);
 endsnippet
 
 snippet onelocinsertHtmlAfter "Insert given HTML after an element"
@@ -463,7 +463,7 @@ endsnippet
 snippet onelocreload "Reload the current page"
 /* Reload the current page */
 const reload = (): void => location.reload()
-// Similar 👇🏼,  const reload = (): string => (location.href = location.href);
+// Similar: const reload = (): string => (location.href = location.href);
 endsnippet
 
 snippet onelocreplace "Replace an element"
@@ -478,7 +478,7 @@ endsnippet
 
 snippet onelocserialize "Serialize form data"
 /* Serialize form data */
-const serialize = (formEle) => Array.from(new FormData(formEle)).reduce((p, [k, v]) => Object.assign({}, p, { [k]: p[k] ? (Array.isArray(p[k]) ? p[k] : [p[k]]).concat(v) : v }), {});
+const serialize = (formEle) => Array.from(new FormData(formEle)).reduce((p, [k, v]) => Object.assign(\{}, p, \{ [k]: p[k] ? (Array.isArray(p[k]) ? p[k] : [p[k]]).concat(v) : v }), \{});
 endsnippet
 
 snippet onelocshow "Show an element"
@@ -494,12 +494,12 @@ endsnippet
 snippet oneloctoggle "Toggle an element"
 /* Toggle an element */
 const toggle = (ele: HTMLElement): string => (ele.style.display = ele.style.display === 'none' ? 'block' : 'none')
-// Similar 👇🏼,  const toggle = (ele: HTMLElement): boolean => (ele.hidden = !ele.hidden);
+// Similar: const toggle = (ele: HTMLElement): boolean => (ele.hidden = !ele.hidden);
 endsnippet
 
 snippet onelocboxHandler "Box handler"
 /* Box handler */
-const boxHandler = (x) => ({ next: (f) => boxHandler(f(x)), done: (f) => f(x) });
+const boxHandler = (x) => (\{ next: (f) => boxHandler(f(x)), done: (f) => f(x) });
 endsnippet
 
 snippet onelocisFunction "Check if a value is a function"
@@ -534,8 +534,8 @@ endsnippet
 
 snippet onelocnoop "Create an empty function"
 /* Create an empty function */
-const noop = () => {}
-// Similar 👇🏼,  const noop = Function();
+const noop = () => \{}
+// Similar: const noop = Function();
 endsnippet
 
 snippet oneloccurry "Curry a function"
@@ -556,7 +556,7 @@ endsnippet
 snippet onelocflip "Flip the arguments of a function"
 /* Flip the arguments of a function */
 const flip = (fn) => (...args) => fn(...args.reverse())
-// Similar 👇🏼,  const flip = (fn) => (b, a) => fn(a, b),  const flip = (fn) => (b) => (a) => fn(a)(b);
+// Similar: const flip = (fn) => (b, a) => fn(a, b)  const flip = (fn) => (b) => (a) => fn(a)(b);
 endsnippet
 
 snippet onelocidentity "Identity function"
@@ -567,7 +567,7 @@ endsnippet
 snippet onelocxor "Logical xor operator"
 /* Logical xor operator */
 const xor = (a, b) => (a && !b) || (!a && b)
-// Similar 👇🏼,  const xor = (a, b) => !(!a && !b) && !(a && b),  const xor = (a, b) => Boolean(!a ^ !b);
+// Similar: const xor = (a, b) => !(!a && !b) && !(a && b)  const xor = (a, b) => Boolean(!a ^ !b);
 endsnippet
 
 snippet onelocmemoize "Memoize a function"
@@ -587,13 +587,13 @@ endsnippet
 
 snippet onelocPoint "Calculate the angle of a line defined by two points"
 /* Calculate the angle of a line defined by two points */
-interface Point { x: number; y: number;}const radiansAngle = (p1: Point, p2: Point): number => Math.atan2(p2.y - p1.y, p2.x - p1.x)
-// Similar 👇🏼,  const degreesAngle = (p1: Point, p2: Point): number => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
+interface Point \{ x: number; y: number;}const radiansAngle = (p1: Point, p2: Point): number => Math.atan2(p2.y - p1.y, p2.x - p1.x)
+// Similar: const degreesAngle = (p1: Point, p2: Point): number => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
 endsnippet
 
 snippet onelocPoint "Calculate the distance between two points"
 /* Calculate the distance between two points */
-interface Point { x: number; y: number;}const distance = (p1: Point, p2: Point): number => Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+interface Point \{ x: number; y: number;}const distance = (p1: Point, p2: Point): number => Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 endsnippet
 
 snippet oneloclerp "Calculate the linear interpolation between two numbers"
@@ -603,22 +603,22 @@ endsnippet
 
 snippet onelocPoint "Calculate the midpoint between two points"
 /* Calculate the midpoint between two points */
-interface Point { x: number; y: number;}const midpoint = (p1: Point, p2: Point): number[] => [(p1.x + p2.x) / 2, (p1.y + p2.y) / 2];
+interface Point \{ x: number; y: number;}const midpoint = (p1: Point, p2: Point): number[] => [(p1.x + p2.x) / 2, (p1.y + p2.y) / 2];
 endsnippet
 
 snippet onelocPoint "Check if a point is inside a rectangle"
 /* Check if a point is inside a rectangle */
-interface Point { x: number; y: number;}interface Rect { bottom: number; left: number; top: number; right: number;}const isInside = (point: Point, rect: Rect): boolean => point.x > rect.left && point.x < rect.right && point.y > rect.top && point.y < rect.bottom;
+interface Point \{ x: number; y: number;}interface Rect \{ bottom: number; left: number; top: number; right: number;}const isInside = (point: Point, rect: Rect): boolean => point.x > rect.left && point.x < rect.right && point.y > rect.top && point.y < rect.bottom;
 endsnippet
 
 snippet onelocRect "Check if a rectangle contains other one"
 /* Check if a rectangle contains other one */
-interface Rect { x1: number; x2: number; y1: number; y2: number;}const contains = (a: Rect, b: Rect): boolean => a.x1 <= b.x1 && a.y1 <= b.y1 && a.x2 >= b.x2 && a.y2 >= b.y2;
+interface Rect \{ x1: number; x2: number; y1: number; y2: number;}const contains = (a: Rect, b: Rect): boolean => a.x1 <= b.x1 && a.y1 <= b.y1 && a.x2 >= b.x2 && a.y2 >= b.y2;
 endsnippet
 
 snippet onelocRect "Check if a rectangle overlaps other one"
 /* Check if a rectangle overlaps other one */
-interface Rect { x1: number; x2: number; y1: number; y2: number;}const contains = (a: Rect, b: Rect): boolean => (a.x1 < b.x2 && b.x1 < a.x2) || (a.y1 < b.y2 && b.y1 < a.y2);
+interface Rect \{ x1: number; x2: number; y1: number; y2: number;}const contains = (a: Rect, b: Rect): boolean => (a.x1 < b.x2 && b.x1 < a.x2) || (a.y1 < b.y2 && b.y1 < a.y2);
 endsnippet
 
 snippet onelocdegsToRads "Convert degrees to radians"
@@ -653,12 +653,12 @@ endsnippet
 
 snippet onelocclearCookies "Clear all cookies"
 /* Clear all cookies */
-const clearCookies = (): void => document.cookie.split(';').forEach((c) => (document.cookie = c.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`)));
+const clearCookies = (): void => document.cookie.split(';').forEach((c) => (document.cookie = c.replace(/^ +/, '').replace(/=.*/, \`=;expires=\$\{new Date().toUTCString()};path=/\`)));
 endsnippet
 
 snippet oneloctoFullHexColor "Convert 3 digits color to 6 digits color"
 /* Convert 3 digits color to 6 digits color */
-const toFullHexColor = (color: string): string => `#${(color.startsWith('#') ? color.slice(1) : color).split('').map((c) => `${c}${c}`).join('')}`;
+const toFullHexColor = (color: string): string => \`#\$\{(color.startsWith('#') ? color.slice(1) : color).split('').map((c) => \`\$\{c}\$\{c}\`).join('')}\`;
 endsnippet
 
 snippet oneloccelsiusToFahrenheit "Convert Celsius to Fahrenheit"
@@ -668,7 +668,7 @@ endsnippet
 
 snippet oneloccookies "Convert cookie to object"
 /* Convert cookie to object */
-const cookies = document.cookie.split(';').map((item) => item.split('=')).reduce((acc, [k, v]) => (acc[k.trim().replace('"', '')] = v) && acc, {});
+const cookies = document.cookie.split(';').map((item) => item.split('=')).reduce((acc, [k, v]) => (acc[k.trim().replace('"', '')] = v) && acc, \{});
 endsnippet
 
 snippet onelocfahrenheitToCelsius "Convert Fahrenheit to Celsius"
@@ -678,23 +678,23 @@ endsnippet
 
 snippet onelochexToRgb "Convert hex to rgb"
 /* Convert hex to rgb */
-const hexToRgb = (hex: string): string => hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) => `#${r}${r}${g}${g}${b}${b}`).substring(1).match(/.{2}/g).map((x) => parseInt(x, 16));
+const hexToRgb = (hex: string): string => hex.replace(/^#?([a-f\\d])([a-f\\d])([a-f\\d])\$/i, (_, r, g, b) => \`#\$\{r}\$\{r}\$\{g}\$\{g}\$\{b}\$\{b}\`).substring(1).match(/.\{2}/g).map((x) => parseInt(x, 16));
 endsnippet
 
 snippet onelocrgbToHex "Convert rgb color to hex"
 /* Convert rgb color to hex */
-const rgbToHex = (red: number, green: number, blue: number): string => `#${((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)}`
-// Similar 👇🏼,  const rgbToHex = (red: number, green: number, blue: number): string => `#\${[red, green, blue].map((v) => v.toString(16).padStart(2, '0')).join('')\}`;
+const rgbToHex = (red: number, green: number, blue: number): string => \`#\$\{((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)}\`
+// Similar: const rgbToHex = (red: number, green: number, blue: number): string => \`#\$\{[red, green, blue].map((v) => v.toString(16).padStart(2, '0')).join('')}\`;
 endsnippet
 
 snippet onelocgetUrlParams "Convert URL parameters to object"
 /* Convert URL parameters to object */
-const getUrlParams = (query: string): Record<string, string> => (Array.from(new URLSearchParams(query)).reduce((p, [k, v]) => Object.assign({}, p, { [k]: p[k] ? (Array.isArray(p[k]) ? p[k] : [p[k]]).concat(v) : v }), {} as Record<string, string>));
+const getUrlParams = (query: string): Record<string, string> => (Array.from(new URLSearchParams(query)).reduce((p, [k, v]) => Object.assign(\{}, p, \{ [k]: p[k] ? (Array.isArray(p[k]) ? p[k] : [p[k]]).concat(v) : v }), \{} as Record<string, string>));
 endsnippet
 
 snippet onelocdecode "Decode a JWT token"
 /* Decode a JWT token */
-const decode = (token: string): string => decodeURIComponent(atob(token.split('.')[1].replace('-', '+').replace('_', '/')).split('').map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`).join(''));
+const decode = (token: string): string => decodeURIComponent(atob(token.split('.')[1].replace('-', '+').replace('_', '/')).split('').map((c) => \`%\$\{('00' + c.charCodeAt(0).toString(16)).slice(-2)}\`).join(''));
 endsnippet
 
 snippet onelocisDarkMode: "Detect dark mode"
@@ -705,7 +705,7 @@ endsnippet
 snippet oneloclinear "Easing functions"
 /* Easing functions */
 const linear = (t: number): number => t
-// Similar 👇🏼,  const easeInQuad = (t: number): number => t * t,  const easeOutQuad = (t: number): number => t * (2 - t),  const easeInOutQuad = (t: number): number => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),  const easeInCubic = (t: number): number => t * t * t,  const easeOutCubic = (t: number): number => --t * t * t + 1,  const easeInOutCubic = (t: number): number => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1),  const easeInQuart = (t: number): number => t * t * t * t,  const easeOutQuart = (t: number): number => 1 - --t * t * t * t,  const easeInOutQuart = (t: number): number => (t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t),  const easeInQuint = (t: number): number => t * t * t * t * t,  const easeOutQuint = (t: number): number => 1 + --t * t * t * t * t,  const easeInOutQuint = (t: number): number => (t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t),  const easeInSine = (t: number): number => 1 + Math.sin((Math.PI / 2) * t - Math.PI / 2),  const easeOutSine = (t: number): number => Math.sin((Math.PI / 2) * t),  const easeInOutSine = (t: number): number => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,  const easeInElastic = (t: number): number => (0.04 - 0.04 / t) * Math.sin(25 * t) + 1,  const easeOutElastic = (t: number): number => ((0.04 * t) / --t) * Math.sin(25 * t),  const easeInOutElastic = (t: number): number => ((t -= 0.5) < 0 ? (0.02 + 0.01 / t) * Math.sin(50 * t) : (0.02 - 0.01 / t) * Math.sin(50 * t) + 1);
+// Similar: const easeInQuad = (t: number): number => t * t  const easeOutQuad = (t: number): number => t * (2 - t)  const easeInOutQuad = (t: number): number => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)  const easeInCubic = (t: number): number => t * t * t  const easeOutCubic = (t: number): number => --t * t * t + 1  const easeInOutCubic = (t: number): number => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1)  const easeInQuart = (t: number): number => t * t * t * t  const easeOutQuart = (t: number): number => 1 - --t * t * t * t  const easeInOutQuart = (t: number): number => (t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t)  const easeInQuint = (t: number): number => t * t * t * t * t  const easeOutQuint = (t: number): number => 1 + --t * t * t * t * t  const easeInOutQuint = (t: number): number => (t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t)  const easeInSine = (t: number): number => 1 + Math.sin((Math.PI / 2) * t - Math.PI / 2)  const easeOutSine = (t: number): number => Math.sin((Math.PI / 2) * t)  const easeInOutSine = (t: number): number => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2  const easeInElastic = (t: number): number => (0.04 - 0.04 / t) * Math.sin(25 * t) + 1  const easeOutElastic = (t: number): number => ((0.04 * t) / --t) * Math.sin(25 * t)  const easeInOutElastic = (t: number): number => ((t -= 0.5) < 0 ? (0.02 + 0.01 / t) * Math.sin(50 * t) : (0.02 - 0.01 / t) * Math.sin(50 * t) + 1);
 endsnippet
 
 snippet onelocthrowdice "Emulate a dice throw"
@@ -715,7 +715,7 @@ endsnippet
 
 snippet onelocencode "Encode a URL"
 /* Encode a URL */
-const encode = (url: string): string => encodeURIComponent(url).replace(/!/g, '%21').replace(/~/g, '%7E').replace(/\*/g, '%2A').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/%20/g, '+');
+const encode = (url: string): string => encodeURIComponent(url).replace(/!/g, '%21').replace(/~/g, '%7E').replace(/\\*/g, '%2A').replace(/'/g, '%27').replace(/\\(/g, '%28').replace(/\\)/g, '%29').replace(/%20/g, '+');
 endsnippet
 
 snippet onelocuid "Generate an unique and increment id"
@@ -726,12 +726,12 @@ endsnippet
 snippet oneloccoalesce "Get the first defined and non null argument"
 /* Get the first defined and non null argument */
 const coalesce = (...args: any[]): any[] => args.find((item) => item !== undefined && item !== null)
-// Similar 👇🏼,  const coalesce = (...args: any[]): any[] => args.find((item) => ![undefined, null].includes(item));
+// Similar: const coalesce = (...args: any[]): any[] => args.find((item) => ![undefined, null].includes(item));
 endsnippet
 
 snippet oneloccookie "Get the value of a cookie"
 /* Get the value of a cookie */
-const cookie = (name) => `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift();
+const cookie = (name) => \`; \$\{document.cookie}\`.split(\`; \$\{name}=\`).pop().split(';').shift();
 endsnippet
 
 snippet onelocgetParam "Get the value of a param from a URL"
@@ -741,12 +741,12 @@ endsnippet
 
 snippet onelocgetTypeOf "Get type of a variable in string"
 /* Get type of a variable in string */
-const getTypeOf = (obj: any): string => (Object.prototype.toString.call(obj).match(/\[object (.*)\]/) as string[])[1];
+const getTypeOf = (obj: any): string => (Object.prototype.toString.call(obj).match(/\\[object (.*)\\]/) as string[])[1];
 endsnippet
 
 snippet onelocredirectHttps "Redirect the page to HTTPS if it is in HTTP"
 /* Redirect the page to HTTPS if it is in HTTP */
-const redirectHttps = (): void => (location.protocol === 'https:' ? void 0 : location.replace(`https:const redirectHttps = (): string => (location.protocol === 'https:' ? '' : (location.protocol = 'https:'));
+const redirectHttps = (): void => (location.protocol === 'https:' ? void 0 : location.replace(\`https:const redirectHttps = (): string => (location.protocol === 'https:' ? '' : (location.protocol = 'https:'));
 endsnippet
 
 snippet onelocrun "Run Promises in sequence"
@@ -766,13 +766,13 @@ endsnippet
 
 snippet onelocaddOrdinal "Add an ordinal suffix to a number"
 /* Add an ordinal suffix to a number */
-const addOrdinal = (n: number): string => `${n}${['st', 'nd', 'rd'][((((n + 90) % 100) - 10) % 10) - 1] || 'th'}`
-// Similar 👇🏼,  const addOrdinal = (n: number): string => `\${n\}\${[, 'st', 'nd', 'rd'][/1?.\$/.exec(n)] || 'th'\}`,  const addOrdinal = (n: number): string => `\${n\}\${[, 'st', 'nd', 'rd'][(n % 100 >> 3) ^ 1 && n % 10] || 'th'\}`,  const addOrdinal = (n: number): string => `\${n\}\${{ one: 'st', two: 'nd', few: 'rd', other: 'th' \}[new Intl.PluralRules('en', { type: 'ordinal' \}).select(n)]\}`;
+const addOrdinal = (n: number): string => \`\$\{n}\$\{['st', 'nd', 'rd'][((((n + 90) % 100) - 10) % 10) - 1] || 'th'}\`
+// Similar: const addOrdinal = (n: number): string => \`\$\{n}\$\{[, 'st', 'nd', 'rd'][/1?.\$/.exec(n)] || 'th'}\`  const addOrdinal = (n: number): string => \`\$\{n}\$\{[, 'st', 'nd', 'rd'][(n % 100 >> 3) ^ 1 && n % 10] || 'th'}\`  const addOrdinal = (n: number): string => \`\$\{n}\$\{\{ one: 'st', two: 'nd', few: 'rd', other: 'th' }[new Intl.PluralRules('en', \{ type: 'ordinal' }).select(n)]}\`;
 endsnippet
 
 snippet onelocfibo "Calculate Fibonacci numbers"
 /* Calculate Fibonacci numbers */
-const fibo = (n: number, memo: Record<string, number> = {}): number => memo[n] || (n <= 2 ? 1 : (memo[n] = fibo(n - 1, memo) + fibo(n - 2, memo)));
+const fibo = (n: number, memo: Record<string, number> = \{}): number => memo[n] || (n <= 2 ? 1 : (memo[n] = fibo(n - 1, memo) + fibo(n - 2, memo)));
 endsnippet
 
 snippet onelocaverage "Calculate the average of arguments"
@@ -817,7 +817,7 @@ endsnippet
 
 snippet oneloctoChars "Convert a number to equivalent characters"
 /* Convert a number to equivalent characters */
-const toChars = (n: number): string => `${n >= 26 ? toChars(Math.floor(n / 26) - 1) : ''}${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n % 26]}`;
+const toChars = (n: number): string => \`\$\{n >= 26 ? toChars(Math.floor(n / 26) - 1) : ''}\$\{'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n % 26]}\`;
 endsnippet
 
 snippet oneloctoNumber "Convert a string to number"
@@ -832,8 +832,8 @@ endsnippet
 
 snippet onelocdigitize "Get the arrays of digits from a number"
 /* Get the arrays of digits from a number */
-const digitize = (n: number): number[] => `${n}`.split('').map((v) => parseInt(v, 10))
-// Similar 👇🏼,  const digitize = (n: number): number[] => [...`\${n\}`].map((v) => parseInt(v, 10));
+const digitize = (n: number): number[] => \`\$\{n}\`.split('').map((v) => parseInt(v, 10))
+// Similar: const digitize = (n: number): number[] => [...\`\$\{n}\`].map((v) => parseInt(v, 10));
 endsnippet
 
 snippet onelocmul "Multiply arguments"
@@ -844,12 +844,12 @@ endsnippet
 snippet onelocprefixWithZeros "Prefix an integer with zeros"
 /* Prefix an integer with zeros */
 const prefixWithZeros = (n: number, length: number): string => (n / Math.pow(10, length)).toFixed(length).substr(2)
-// Similar 👇🏼,  const prefixWithZeros = (n: number, length: number): string => `\${Array(length).join('0')\}\${n\}`.slice(-length),  const prefixWithZeros = (n: number, length: number): string => String(n).padStart(length, '0');
+// Similar: const prefixWithZeros = (n: number, length: number): string => \`\$\{Array(length).join('0')}\$\{n}\`.slice(-length)  const prefixWithZeros = (n: number, length: number): string => String(n).padStart(length, '0');
 endsnippet
 
 snippet onelocround "Round a number to a given number of digits"
 /* Round a number to a given number of digits */
-const round = (n: number, decimals: number = 0): number => Number(`${Math.round(`${n}e${decimals}`)}e-${decimals}`);
+const round = (n: number, decimals: number = 0): number => Number(\`\$\{Math.round(\`\$\{n}e\$\{decimals}\`)}e-\$\{decimals}\`);
 endsnippet
 
 snippet onelocsubtract "Subtract arguments"
@@ -864,8 +864,8 @@ endsnippet
 
 snippet oneloctoFixed "Truncate a number to a given number of decimal places without rounding"
 /* Truncate a number to a given number of decimal places without rounding */
-const toFixed = (n: number, fixed: number): number => +(`${n}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${fixed}})?`)) as string[])[0]
-// Similar 👇🏼,  const toFixed = (n: number, fixed: number): number => ~~(Math.pow(10, fixed) * n) / Math.pow(10, fixed);
+const toFixed = (n: number, fixed: number): number => +(\`\$\{n}\`.match(new RegExp(\`^-?\\\\d+(?:\\.\\\\d\{0,\$\{fixed}})?\`)) as string[])[0]
+// Similar: const toFixed = (n: number, fixed: number): number => ~~(Math.pow(10, fixed) * n) / Math.pow(10, fixed);
 endsnippet
 
 snippet onelocisEqual "Check if multiple objects are equal"
@@ -881,7 +881,7 @@ endsnippet
 snippet oneloctoObj "Create an object from the pairs of key and value"
 /* Create an object from the pairs of key and value */
 const toObj = (arr) => Object.fromEntries(arr)
-// Similar 👇🏼,  const toObj = (arr) => arr.reduce((a, c) => ((a[c[0]] = c[1]), a), {\});
+// Similar: const toObj = (arr) => arr.reduce((a, c) => ((a[c[0]] = c[1]), a), \{});
 endsnippet
 
 snippet onelocpluck "Extract values of a property from an array of objects"
@@ -896,40 +896,40 @@ endsnippet
 
 snippet onelocrenameKeys "Immutably rename object keys"
 /* Immutably rename object keys */
-const renameKeys = (keysMap, obj) => Object.keys(obj).reduce((acc, key) => ({ ...acc, ...{ [keysMap[key] || key]: obj[key] } }), {});
+const renameKeys = (keysMap, obj) => Object.keys(obj).reduce((acc, key) => (\{ ...acc, ...\{ [keysMap[key] || key]: obj[key] } }), \{});
 endsnippet
 
 snippet onelocinvert "Invert keys and values of an object"
 /* Invert keys and values of an object */
-const invert = (obj) => Object.keys(obj).reduce((res, k) => Object.assign(res, { [obj[k]]: k }), {})
-// Similar 👇🏼,  const invert = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => [v, k]));
+const invert = (obj) => Object.keys(obj).reduce((res, k) => Object.assign(res, \{ [obj[k]]: k }), \{})
+// Similar: const invert = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => [v, k]));
 endsnippet
 
 snippet onelocomit "Omit a subset of properties from an object"
 /* Omit a subset of properties from an object */
-const omit = (obj, keys) => Object.keys(obj).filter((k) => !keys.includes(k)).reduce((res, k) => Object.assign(res, { [k]: obj[k] }), {});
+const omit = (obj, keys) => Object.keys(obj).filter((k) => !keys.includes(k)).reduce((res, k) => Object.assign(res, \{ [k]: obj[k] }), \{});
 endsnippet
 
 snippet onelocpick "Pick a subset of properties of an object"
 /* Pick a subset of properties of an object */
-const pick = (obj, keys) => Object.keys(obj).filter((k) => keys.includes(k)).reduce((res, k) => Object.assign(res, { [k]: obj[k] }), {});
+const pick = (obj, keys) => Object.keys(obj).filter((k) => keys.includes(k)).reduce((res, k) => Object.assign(res, \{ [k]: obj[k] }), \{});
 endsnippet
 
 snippet onelocremoveNullUndefined "Remove all null and undefined properties from an object"
 /* Remove all null and undefined properties from an object */
-const removeNullUndefined = (obj) => Object.entries(obj).reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), {})
-// Similar 👇🏼,  const removeNullUndefined = (obj) => Object.entries(obj).filter(([_, v]) => v != null).reduce((acc, [k, v]) => ({ ...acc, [k]: v \}), {\}),  const removeNullUndefined = (obj) => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
+const removeNullUndefined = (obj) => Object.entries(obj).reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), \{})
+// Similar: const removeNullUndefined = (obj) => Object.entries(obj).filter(([_, v]) => v != null).reduce((acc, [k, v]) => (\{ ...acc, [k]: v }), \{})  const removeNullUndefined = (obj) => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
 endsnippet
 
 snippet onelocshallowCopy "Shallow copy an object"
 /* Shallow copy an object */
-const shallowCopy = obj => Object.assign({}, obj)
-// Similar 👇🏼,  const shallowCopy = obj => {...obj\};
+const shallowCopy = obj => Object.assign(\{}, obj)
+// Similar: const shallowCopy = obj => \{...obj};
 endsnippet
 
 snippet onelocsort "Sort an object by its properties"
 /* Sort an object by its properties */
-const sort = (obj) => Object.keys(obj).sort().reduce((p, c) => ((p[c] = obj[c]), p), {});
+const sort = (obj) => Object.keys(obj).sort().reduce((p, c) => ((p[c] = obj[c]), p), \{});
 endsnippet
 
 snippet onelocrandomBoolean "Generate a random boolean"
@@ -944,8 +944,8 @@ endsnippet
 
 snippet onelocrandomColor "Generate a random hex color"
 /* Generate a random hex color */
-const randomColor = (): string => `#${Math.random().toString(16).slice(2, 8).padEnd(6, '0')}`
-// Similar 👇🏼,  const randomColor = (): string => `#\${(~~(Math.random() * (1 << 24))).toString(16)\}`;
+const randomColor = (): string => \`#\$\{Math.random().toString(16).slice(2, 8).padEnd(6, '0')}\`
+// Similar: const randomColor = (): string => \`#\$\{(~~(Math.random() * (1 << 24))).toString(16)}\`;
 endsnippet
 
 snippet onelocrandomInteger "Generate a random integer in given range"
@@ -985,7 +985,7 @@ endsnippet
 
 snippet onelocrandomArrayInRange "Generate an array of random integers in a given range"
 /* Generate an array of random integers in a given range */
-const randomArrayInRange = (min: number, max: number, n: number): number[] => Array.from({ length: n }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+const randomArrayInRange = (min: number, max: number, n: number): number[] => Array.from(\{ length: n }, () => Math.floor(Math.random() * (max - min + 1)) + min);
 endsnippet
 
 snippet onelocrandomItem "Get a random item and remove it from an array"
@@ -1010,23 +1010,23 @@ endsnippet
 
 snippet onelocrandomLines "Pick random lines from a text document"
 /* Pick random lines from a text document */
-const randomLines = (str, count) => str.split(/\r?\n/).reduce((p, _, __, arr) => (p[0] < count ? [p[0] + 1, p[1].concat(arr.splice((Math.random() * arr.length) | 0, 1))] : p), [0, []])[1];
+const randomLines = (str, count) => str.split(/\\r?\\n/).reduce((p, _, __, arr) => (p[0] < count ? [p[0] + 1, p[1].concat(arr.splice((Math.random() * arr.length) | 0, 1))] : p), [0, []])[1];
 endsnippet
 
 snippet oneloccapitalize "Capitalize a string"
 /* Capitalize a string */
-const capitalize = (str: string): string => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
-// Similar 👇🏼,  const capitalize = ([first, ...rest]: string): string => `\${first.toUpperCase()\}\${rest.join('')\}`;
+const capitalize = (str: string): string => \`\$\{str.charAt(0).toUpperCase()}\$\{str.slice(1)}\`
+// Similar: const capitalize = ([first, ...rest]: string): string => \`\$\{first.toUpperCase()}\$\{rest.join('')}\`;
 endsnippet
 
 snippet onelocisRelative "Check if a path is relative"
 /* Check if a path is relative */
-const isRelative = (path: string): boolean => !/^([a-z]+:)?[\\/]/i.test(path);
+const isRelative = (path: string): boolean => !/^([a-z]+:)?[\\\\/]/i.test(path);
 endsnippet
 
 snippet onelocconsistsRepeatedSubstring "Check if a string consists of a repeated character sequence"
 /* Check if a string consists of a repeated character sequence */
-const consistsRepeatedSubstring = (str: string): boolean => `${str}${str}`.indexOf(str, 1) !== str.length;
+const consistsRepeatedSubstring = (str: string): boolean => \`\$\{str}\$\{str}\`.indexOf(str, 1) !== str.length;
 endsnippet
 
 snippet onelocisPalindrome "Check if a string is a palindrome"
@@ -1056,39 +1056,39 @@ endsnippet
 
 snippet oneloctoCamelCase "Convert a string to camelCase"
 /* Convert a string to camelCase */
-const toCamelCase = (str: string): string => str.trim().replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''));
+const toCamelCase = (str: string): string => str.trim().replace(/[-_\\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''));
 endsnippet
 
 snippet oneloctoPascalCase "Convert a string to PascalCase"
 /* Convert a string to PascalCase */
-const toPascalCase = (str: string): string => (str.match(/[a-zA-Z0-9]+/g) || []).map((w) => `${w.charAt(0).toUpperCase()}${w.slice(1)}`).join('');
+const toPascalCase = (str: string): string => (str.match(/[a-zA-Z0-9]+/g) || []).map((w) => \`\$\{w.charAt(0).toUpperCase()}\$\{w.slice(1)}\`).join('');
 endsnippet
 
 snippet onelocslugify "Convert a string to URL slug"
 /* Convert a string to URL slug */
-const slugify = (str: string): string => str.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+const slugify = (str: string): string => str.toLowerCase().replace(/\\s+/g, '-').replace(/[^\\w-]+/g, '');
 endsnippet
 
 snippet oneloctoUnixPath "Convert a Windows file path to Unix path"
 /* Convert a Windows file path to Unix path */
-const toUnixPath = (path: string): string => path.replace(/[\\/]+/g, '/').replace(/^([a-zA-Z]+:|\.\/)/, '');
+const toUnixPath = (path: string): string => path.replace(/[\\\\/]+/g, '/').replace(/^([a-zA-Z]+:|\\.\\/)/, '');
 endsnippet
 
 snippet onelocuint8ToBase64 "Convert an uint8 array to a base64 encoded string"
 /* Convert an uint8 array to a base64 encoded string */
 const uint8ToBase64 = (arr: Uint8Array): string => btoa(Array(arr.length).fill('').map((_, i) => String.fromCharCode(arr[i])).join(''))
-// Similar 👇🏼,  const uint8ToBase64 = (arr: Uint8Array): string => Buffer.from(arr).toString('base64');
+// Similar: const uint8ToBase64 = (arr: Uint8Array): string => Buffer.from(arr).toString('base64');
 endsnippet
 
 snippet onelockebabToCamel "Convert camelCase to kebab-case and vice versa"
 /* Convert camelCase to kebab-case and vice versa */
 const kebabToCamel = (str: string): string => str.replace(/-./g, (m) => m.toUpperCase()[1])
-// Similar 👇🏼,  const camelToKebab = (str: string): string => str.replace(/([a-z0-9])([A-Z])/g, '\$1-\$2').toLowerCase();
+// Similar: const camelToKebab = (str: string): string => str.replace(/([a-z0-9])([A-Z])/g, '\$1-\$2').toLowerCase();
 endsnippet
 
 snippet onelocsnakeToCamel "Convert snake_case to camelCase"
 /* Convert snake_case to camelCase */
-const snakeToCamel = (str: string): string => str.toLowerCase().replace(/(_\w)/g, (m) => m.toUpperCase().substr(1));
+const snakeToCamel = (str: string): string => str.toLowerCase().replace(/(_\\w)/g, (m) => m.toUpperCase().substr(1));
 endsnippet
 
 snippet onelocgetIndex "Convert the name of an Excel column to number"
@@ -1098,25 +1098,25 @@ endsnippet
 
 snippet oneloccountWords "Count the number of words in a string"
 /* Count the number of words in a string */
-const countWords = (str: string): number => str.trim().split(/\s+/).length;
+const countWords = (str: string): number => str.trim().split(/\\s+/).length;
 endsnippet
 
 snippet oneloccountOccurrences "Count the occurrences of a character in a string"
 /* Count the occurrences of a character in a string */
 const countOccurrences = (str: string, char: string): number => [...str].reduce((a, v) => (v === char ? a + 1 : a), 0)
-// Similar 👇🏼,  const countOccurrences = (str: string, char: string): number => str.split('').reduce((a, v) => (v === char ? a + 1 : a), 0),  const countOccurrences = (str: string, char: string): number => [...str].filter((item) => item === char).length,  const countOccurrences = (str: string, char: string): number => str.split('').filter((item) => item === char).length;
+// Similar: const countOccurrences = (str: string, char: string): number => str.split('').reduce((a, v) => (v === char ? a + 1 : a), 0)  const countOccurrences = (str: string, char: string): number => [...str].filter((item) => item === char).length  const countOccurrences = (str: string, char: string): number => str.split('').filter((item) => item === char).length;
 endsnippet
 
 snippet onelocdecapitalize "Decapitalize a string"
 /* Decapitalize a string */
-const decapitalize = (str: string): string => `${str.charAt(0).toLowerCase()}${str.slice(1)}`
-// Similar 👇🏼,  const decapitalize = ([first, ...rest]: string): string => `\${first.toLowerCase()\}\${rest.join('')\}`;
+const decapitalize = (str: string): string => \`\$\{str.charAt(0).toLowerCase()}\$\{str.slice(1)}\`
+// Similar: const decapitalize = ([first, ...rest]: string): string => \`\$\{first.toLowerCase()}\$\{rest.join('')}\`;
 endsnippet
 
 snippet onelocescape "Escape HTML special characters"
 /* Escape HTML special characters */
 const escape = (str: string): string => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&quot;')
-// Similar 👇🏼,  const escape = (str: string): string => str.replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' \}[m]));
+// Similar: const escape = (str: string): string => str.replace(/[&<>"']/g, (m) => (\{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 endsnippet
 
 snippet onelocundefined "Format a string"
@@ -1127,13 +1127,13 @@ endsnippet
 snippet onelochash "Generate a hash of a string"
 /* Generate a hash of a string */
 const hash = (str: string): number => str.split('').reduce((prev, curr) => (Math.imul(31, prev) + curr.charCodeAt(0)) | 0, 0)
-// Similar 👇🏼,  const hash = (str: string): number => str.split('').reduce((prev, curr) => ((prev << 5) - prev + curr.charCodeAt(0)) | 0, 0);
+// Similar: const hash = (str: string): number => str.split('').reduce((prev, curr) => ((prev << 5) - prev + curr.charCodeAt(0)) | 0, 0);
 endsnippet
 
 snippet onelocbaseUrl "Get the base URL without any parameters"
 /* Get the base URL without any parameters */
 const baseUrl = (url: string): string => (url.indexOf('?') === -1 ? url : url.slice(0, url.indexOf('?')))
-// Similar 👇🏼,  const baseUrl = (url: string): string => (url.includes('?') ? url.slice(0, url.indexOf('?')) : url),  const baseUrl = (url: string): string => url.split('?')[0];
+// Similar: const baseUrl = (url: string): string => (url.includes('?') ? url.slice(0, url.indexOf('?')) : url)  const baseUrl = (url: string): string => url.split('?')[0];
 endsnippet
 
 snippet onelocext "Get the file extension from a file name"
@@ -1154,81 +1154,81 @@ endsnippet
 snippet oneloccharacterCount "Get the number of a character in a string"
 /* Get the number of a character in a string */
 const characterCount = (str: string, char: string): number => str.split(char).length - 1
-// Similar 👇🏼,  const characterCount = (str: string, char: string): number => str.replace(new RegExp(String.raw`[^\${char\}]`, 'g'), '').length;
+// Similar: const characterCount = (str: string, char: string): number => str.replace(new RegExp(String.raw\`[^\$\{char}]\`, 'g'), '').length;
 endsnippet
 
 snippet oneloclowercaseFirst "Make the first character of a string lowercase"
 /* Make the first character of a string lowercase */
-const lowercaseFirst = (str: string): string => `${str.charAt(0).toLowerCase()}${str.slice(1)}`;
+const lowercaseFirst = (str: string): string => \`\$\{str.charAt(0).toLowerCase()}\$\{str.slice(1)}\`;
 endsnippet
 
 snippet onelocnormalizePath "Normalize file path slashes"
 /* Normalize file path slashes */
-const normalizePath = (path: string): string => path.replace(/[\\/]+/g, '/');
+const normalizePath = (path: string): string => path.replace(/[\\\\/]+/g, '/');
 endsnippet
 
 snippet onelocprependNumbers "Prepend a line number to each line of a text document"
 /* Prepend a line number to each line of a text document */
-const prependNumbers = (str: string): string => str.split(/\r?\n/).map((line, i) => `${(i + 1).toString().padStart(2, ' ')} ${line}`).join('\n');
+const prependNumbers = (str: string): string => str.split(/\\r?\\n/).map((line, i) => \`\$\{(i + 1).toString().padStart(2, ' ')} \$\{line}\`).join('\\n');
 endsnippet
 
 snippet onelocremoveDuplicateLines "Remove duplicate lines of a text document"
 /* Remove duplicate lines of a text document */
-const removeDuplicateLines = (str: string): string => Array.from(new Set(str.split(/\r?\n/))).join('\n');
+const removeDuplicateLines = (str: string): string => Array.from(new Set(str.split(/\\r?\\n/))).join('\\n');
 endsnippet
 
 snippet onelocremoveEmptyLines "Remove empty lines of a text document"
 /* Remove empty lines of a text document */
-const removeEmptyLines = (str: string): string => str.split(/\r?\n/).filter((line) => line.trim() !== '').join('\n');
+const removeEmptyLines = (str: string): string => str.split(/\\r?\\n/).filter((line) => line.trim() !== '').join('\\n');
 endsnippet
 
 snippet onelocremoveSpaces "Remove spaces from a string"
 /* Remove spaces from a string */
-const removeSpaces = (str: string): string => str.replace(/\s/g, '');
+const removeSpaces = (str: string): string => str.replace(/\\s/g, '');
 endsnippet
 
 snippet onelocrepeat "Repeat a string"
 /* Repeat a string */
 const repeat = (str: string, numberOfTimes: number): string => str.repeat(numberOfTimes)
-// Similar 👇🏼,  const repeat = (str: string, numberOfTimes: number): string => Array(numberOfTimes + 1).join(str);
+// Similar: const repeat = (str: string, numberOfTimes: number): string => Array(numberOfTimes + 1).join(str);
 endsnippet
 
 snippet onelocnl2br "Replace all line breaks with br elements"
 /* Replace all line breaks with br elements */
-const nl2br = (str: string): string => str.replace(new RegExp('\r?\n', 'g'), '<br>');
+const nl2br = (str: string): string => str.replace(new RegExp('\\r?\\n', 'g'), '<br>');
 endsnippet
 
 snippet onelocreplace "Replace all tab characters with spaces"
 /* Replace all tab characters with spaces */
-const replace = (str: string, numSpaces = 4): string => str.replaceAll('\t', ' '.repeat(numSpaces));
+const replace = (str: string, numSpaces = 4): string => str.replaceAll('\\t', ' '.repeat(numSpaces));
 endsnippet
 
 snippet onelocreplaceSpaces "Replace multiple spaces with a single space"
 /* Replace multiple spaces with a single space */
-const replaceSpaces = (str: string): string => str.replace(/\s\s+/g, ' ')
-// Similar 👇🏼,  const replaceOnlySpaces = (str: string): string => str.replace(/ +/g, ' ');
+const replaceSpaces = (str: string): string => str.replace(/\\s\\s+/g, ' ')
+// Similar: const replaceOnlySpaces = (str: string): string => str.replace(/ +/g, ' ');
 endsnippet
 
 snippet onelocmask "Replace the first given number of characters of a string with another character"
 /* Replace the first given number of characters of a string with another character */
-const mask = (str: string, num: number, mask: string): string => `${str}`.slice(num).padStart(`${str}`.length, mask);
+const mask = (str: string, num: number, mask: string): string => \`\$\{str}\`.slice(num).padStart(\`\$\{str}\`.length, mask);
 endsnippet
 
 snippet onelocreverse "Reverse a string"
 /* Reverse a string */
 const reverse = (str: string): string => str.split('').reverse().join('')
-// Similar 👇🏼,  const reverse = (str: string): string => [...str].reverse().join(''),  const reverse = (str: string): string => str.split('').reduce((rev, char) => `\${char\}\${rev\}`, ''),  const reverse = (str: string): string => (str === '' ? '' : `\${reverse(str.substr(1))\}\${str.charAt(0)\}`);
+// Similar: const reverse = (str: string): string => [...str].reverse().join('')  const reverse = (str: string): string => str.split('').reduce((rev, char) => \`\$\{char}\$\{rev}\`, '')  const reverse = (str: string): string => (str === '' ? '' : \`\$\{reverse(str.substr(1))}\$\{str.charAt(0)}\`);
 endsnippet
 
 snippet onelocreverseLines "Reverse the order of lines of a text"
 /* Reverse the order of lines of a text */
-const reverseLines = (str: string): string => str.split(/\r?\n/).reverse().join('\n');
+const reverseLines = (str: string): string => str.split(/\\r?\\n/).reverse().join('\\n');
 endsnippet
 
 snippet onelocsortLines "Sort lines of a text document in the alphabetical order"
 /* Sort lines of a text document in the alphabetical order */
-const sortLines = (str: string): string => str.split(/\r?\n/).sort().join('\n')
-// Similar 👇🏼,  const reverseSortedLines = (str: string): string => str.split(/\r?\n/).sort().reverse().join('\n');
+const sortLines = (str: string): string => str.split(/\\r?\\n/).sort().join('\\n')
+// Similar: const reverseSortedLines = (str: string): string => str.split(/\\r?\\n/).sort().reverse().join('\\n');
 endsnippet
 
 snippet onelocsort "Sort the characters of a string in the alphabetical order"
@@ -1238,7 +1238,7 @@ endsnippet
 
 snippet onelocstripAnsiCodes "Strip ANSI codes from a string"
 /* Strip ANSI codes from a string */
-const stripAnsiCodes = (str: string): string => str.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+const stripAnsiCodes = (str: string): string => str.replace(/[\\u001b\\u009b][[()#;?]*(?:[0-9]\{1,4}(?:;[0-9]\{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 endsnippet
 
 snippet onelocswapCase "Swap case of characters in a string"
@@ -1248,8 +1248,8 @@ endsnippet
 
 snippet oneloctrimSlashes "Trim slashes at the beginning and the end of a string"
 /* Trim slashes at the beginning and the end of a string */
-const trimSlashes = (str: string): string => str.replace(/^\/+|\/+$/g, '')
-// Similar 👇🏼,  const trimSlashes = (str: string): string => str.split('/').filter(Boolean).join('/');
+const trimSlashes = (str: string): string => str.replace(/^\\/+|\\/+\$/g, '')
+// Similar: const trimSlashes = (str: string): string => str.split('/').filter(Boolean).join('/');
 endsnippet
 
 snippet oneloctrim "Trim some character"
@@ -1264,7 +1264,7 @@ endsnippet
 
 snippet oneloctruncate "Truncate a string at full words"
 /* Truncate a string at full words */
-const truncate = (str: string, max: number, suffix: string = '...'): string => (str.length < max ? str : `${str.substr(0, str.substr(0, max - suffix.length).lastIndexOf(' '))}${suffix}`);
+const truncate = (str: string, max: number, suffix: string = '...'): string => (str.length < max ? str : \`\$\{str.substr(0, str.substr(0, max - suffix.length).lastIndexOf(' '))}\$\{suffix}\`);
 endsnippet
 
 snippet onelocunescape "Unescape HTML special characters"
@@ -1274,14 +1274,14 @@ endsnippet
 
 snippet onelocuppercaseWords "Uppercase the first character of each word in a string"
 /* Uppercase the first character of each word in a string */
-const uppercaseWords = (str: string): string => str.split(' ').map((w) => `${w.charAt(0).toUpperCase()}${w.slice(1)}`).join(' ')
-// Similar 👇🏼,  const uppercaseWords = (str: string): string => str.replace(/^(.)|\s+(.)/g, (c) => c.toUpperCase());
+const uppercaseWords = (str: string): string => str.split(' ').map((w) => \`\$\{w.charAt(0).toUpperCase()}\$\{w.slice(1)}\`).join(' ')
+// Similar: const uppercaseWords = (str: string): string => str.replace(/^(.)|\\s+(.)/g, (c) => c.toUpperCase());
 endsnippet
 
 snippet onelocisDigit "Check if a character is a digit"
 /* Check if a character is a digit */
 const isDigit = (char: string): boolean => char < 10
-// Similar 👇🏼,  const isDigit = (char: string): boolean => char.length === 1 && c >= '0' && c <= '9',  const isDigit = (char: string): boolean => Boolean([true, true, true, true, true, true, true, true, true, true][char]);
+// Similar: const isDigit = (char: string): boolean => char.length === 1 && c >= '0' && c <= '9'  const isDigit = (char: string): boolean => Boolean([true, true, true, true, true, true, true, true, true, true][char]);
 endsnippet
 
 snippet onelocisWeekday "Check if a date is a weekday"
@@ -1327,7 +1327,7 @@ endsnippet
 snippet onelocisEven "Check if a number is even"
 /* Check if a number is even */
 const isEven = (n: number): boolean => n % 2 === 0
-// Similar 👇🏼,  const isEven = (n: number): boolean => (n & 1) === 0,  const isEven = (n: number): boolean => !(n & 1),  const isEven = (n: number): boolean => Number.isInteger(n / 2);
+// Similar: const isEven = (n: number): boolean => (n & 1) === 0  const isEven = (n: number): boolean => !(n & 1)  const isEven = (n: number): boolean => Number.isInteger(n / 2);
 endsnippet
 
 snippet onelocinRange "Check if a number is in a given range"
@@ -1338,13 +1338,13 @@ endsnippet
 snippet onelocisNegative "Check if a number is negative"
 /* Check if a number is negative */
 const isNegative = (n: number): boolean => Math.sign(n) === -1
-// Similar 👇🏼,  const isNegative = (n: number): boolean => n < 0;
+// Similar: const isNegative = (n: number): boolean => n < 0;
 endsnippet
 
 snippet onelocisOdd "Check if a number is odd"
 /* Check if a number is odd */
 const isOdd = (n: number): boolean => n % 2 !== 0
-// Similar 👇🏼,  const isOdd = (n: number): boolean => !!(n & 1),  const isOdd = (n: number): boolean => !Number.isInteger(n / 2);
+// Similar: const isOdd = (n: number): boolean => !!(n & 1)  const isOdd = (n: number): boolean => !Number.isInteger(n / 2);
 endsnippet
 
 snippet onelocisPositive "Check if a number is positive"
@@ -1359,7 +1359,7 @@ endsnippet
 
 snippet onelocisAscii "Check if a string contains only ASCII characters"
 /* Check if a string contains only ASCII characters */
-const isAscii = (str: string): boolean => /^[\x00-\x7F]+$/.test(str);
+const isAscii = (str: string): boolean => /^[\\x00-\\x7F]+\$/.test(str);
 endsnippet
 
 snippet onelocisNumeric "Check if a string contains only digits"
@@ -1369,12 +1369,12 @@ endsnippet
 
 snippet onelocisAlphanumeric "Check if a string contains only letters and numbers"
 /* Check if a string contains only letters and numbers */
-const isAlphanumeric = (str: string): boolean => /^[0-9A-Z]+$/i.test(str);
+const isAlphanumeric = (str: string): boolean => /^[0-9A-Z]+\$/i.test(str);
 endsnippet
 
 snippet onelocisAlpha "Check if a string contains only letters"
 /* Check if a string contains only letters */
-const isAlpha = (str: string): boolean => /^[A-Z]+$/i.test(str);
+const isAlpha = (str: string): boolean => /^[A-Z]+\$/i.test(str);
 endsnippet
 
 snippet oneloccontainsUpperCase "Check if a string contains upper case characters"
@@ -1384,29 +1384,29 @@ endsnippet
 
 snippet oneloccontainsWhitespace "Check if a string contains whitespace"
 /* Check if a string contains whitespace */
-const containsWhitespace = (str: string): boolean => (str) => /\s/.test(str);
+const containsWhitespace = (str: string): boolean => (str) => /\\s/.test(str);
 endsnippet
 
 snippet onelocisHexColor "Check if a string is a hexadecimal color"
 /* Check if a string is a hexadecimal color */
-const isHexColor = (color: string): boolean => /^#([0-9A-F]{3}|[0-9A-F]{4}|[0-9A-F]{6}|[0-9A-F]{8})$/i.test(color);
+const isHexColor = (color: string): boolean => /^#([0-9A-F]\{3}|[0-9A-F]\{4}|[0-9A-F]\{6}|[0-9A-F]\{8})\$/i.test(color);
 endsnippet
 
 snippet onelocisHexadecimal "Check if a string is a hexadecimal number"
 /* Check if a string is a hexadecimal number */
-const isHexadecimal = (str: string): boolean => /^[A-F0-9]+$/i.test(str)
-// Similar 👇🏼,  const isHexadecimal = (str: string): boolean => str.split('').every((c) => '0123456789ABCDEFabcdef'.indexOf(c) !== -1);
+const isHexadecimal = (str: string): boolean => /^[A-F0-9]+\$/i.test(str)
+// Similar: const isHexadecimal = (str: string): boolean => str.split('').every((c) => '0123456789ABCDEFabcdef'.indexOf(c) !== -1);
 endsnippet
 
 snippet onelocisMongoId "Check if a string is a MongoDB ObjectId"
 /* Check if a string is a MongoDB ObjectId */
-const isMongoId = (str: string): boolean => str.length === 24 && /^[A-F0-9]+$/i.test(str)
-// Similar 👇🏼,  const isMongoId = (str: string): boolean => str.length === 24 && str.split('').every((c) => '0123456789ABCDEFabcdef'.indexOf(c) !== -1);
+const isMongoId = (str: string): boolean => str.length === 24 && /^[A-F0-9]+\$/i.test(str)
+// Similar: const isMongoId = (str: string): boolean => str.length === 24 && str.split('').every((c) => '0123456789ABCDEFabcdef'.indexOf(c) !== -1);
 endsnippet
 
 snippet onelocisOctal "Check if a string is an octal number"
 /* Check if a string is an octal number */
-const isOctal = (str: string): boolean => /^(0o)?[0-7]+$/i.test(str);
+const isOctal = (str: string): boolean => /^(0o)?[0-7]+\$/i.test(str);
 endsnippet
 
 snippet onelocisLowerCase "Check if a string is lower case"
@@ -1421,7 +1421,7 @@ endsnippet
 
 snippet onelocisBIC "Check if a value is a business identifier code"
 /* Check if a value is a business identifier code */
-const isBIC = (value: string): boolean => /^[a-zA-Z]{6}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$/.test(value);
+const isBIC = (value: string): boolean => /^[a-zA-Z]\{6}[a-zA-Z0-9]\{2}([a-zA-Z0-9]\{3})?\$/.test(value);
 endsnippet
 
 snippet onelocisNumber "Check if a value is a number"
@@ -1451,17 +1451,17 @@ endsnippet
 
 snippet onelocisBase32 "Check if a value is base32 encoded"
 /* Check if a value is base32 encoded */
-const isBase32 = (value: string): boolean => value.length % 8 === 0 && /^[A-Z2-7]+=*$/.test(value);
+const isBase32 = (value: string): boolean => value.length % 8 === 0 && /^[A-Z2-7]+=*\$/.test(value);
 endsnippet
 
 snippet onelocisBase58 "Check if a value is base58 encoded"
 /* Check if a value is base58 encoded */
-const isBase58 = (value: string): boolean => /^[A-HJ-NP-Za-km-z1-9]*$/.test(value);
+const isBase58 = (value: string): boolean => /^[A-HJ-NP-Za-km-z1-9]*\$/.test(value);
 endsnippet
 
 snippet onelocisBase64 "Check if a value is base64 encoded"
 /* Check if a value is base64 encoded */
-const isBase64 = (value: string): boolean => /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/.test(value);
+const isBase64 = (value: string): boolean => /^(?:[A-Za-z0-9+/]\{4})*(?:[A-Za-z0-9+/]\{2}==|[A-Za-z0-9+/]\{3}=|[A-Za-z0-9+/]\{4})\$/.test(value);
 endsnippet
 
 snippet onelocisNil "Check if a value is nil"
@@ -1472,25 +1472,25 @@ endsnippet
 snippet onelocisLeapYear "Check if a year is leap year"
 /* Check if a year is leap year */
 const isLeapYear = (year: number): boolean => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
-// Similar 👇🏼,  const isLeapYear = (year: number): boolean => new Date(year, 1, 29).getDate() === 29;
+// Similar: const isLeapYear = (year: number): boolean => new Date(year, 1, 29).getDate() === 29;
 endsnippet
 
 snippet onelocisEqual "Check if all array elements are equal to a given value"
 /* Check if all array elements are equal to a given value */
 const isEqual = <T,_>(arr: T[], value: T): boolean => arr.every((item) => item === value)
-// Similar 👇🏼,  const isEqual = <T,_>(arr: T[], value: T): boolean => !arr.some((item) => item !== value);
+// Similar: const isEqual = <T,_>(arr: T[], value: T): boolean => !arr.some((item) => item !== value);
 endsnippet
 
 snippet onelocareEqual "Check if all items in an array are equal"
 /* Check if all items in an array are equal */
 const areEqual = <T,_>(arr: T[]): boolean => arr.length > 0 && arr.every((item) => item === arr[0])
-// Similar 👇🏼,  const areEqual = <T,_>(arr: T[]): boolean => new Set(arr).size === 1;
+// Similar: const areEqual = <T,_>(arr: T[]): boolean => new Set(arr).size === 1;
 endsnippet
 
 snippet oneloccontains "Check if an array contains a value matching some criterias"
 /* Check if an array contains a value matching some criterias */
 const contains = <T,_>(arr: T[], criteria: (a: T) => boolean): boolean => arr.some((v) => criteria(v))
-// Similar 👇🏼,  const contains = <T,_>(arr: T[], criteria: (a: T) => boolean): boolean => arr.some(criteria),  const contains = <T,_>(arr: T[], criteria: (a: T) => boolean): boolean => arr.filter(criteria).length > 0;
+// Similar: const contains = <T,_>(arr: T[], criteria: (a: T) => boolean): boolean => arr.some(criteria)  const contains = <T,_>(arr: T[], criteria: (a: T) => boolean): boolean => arr.filter(criteria).length > 0;
 endsnippet
 
 snippet onelocisNotEmpty "Check if an array is not empty"
@@ -1501,7 +1501,7 @@ endsnippet
 snippet onelocisSubset "Check if an array is subset of other array"
 /* Check if an array is subset of other array */
 const isSubset = <T,_>(a: T[], b: T[]): boolean => new Set(b).size === new Set(b.concat(a)).size
-// Similar 👇🏼,  const isSubset = <T,_>(a: T[], b: T[]): boolean => b.join('|').includes(a.join('|'));
+// Similar: const isSubset = <T,_>(a: T[], b: T[]): boolean => b.join('|').includes(a.join('|'));
 endsnippet
 
 snippet onelocisPromise "Check if an object is a Promise"
@@ -1517,7 +1517,7 @@ endsnippet
 snippet onelocisEmpty "Check if an object is empty"
 /* Check if an object is empty */
 const isEmpty = (obj: object): boolean => Reflect.ownKeys(obj).length === 0 && obj.constructor === Object
-// Similar 👇🏼,  const isEmpty = (obj: object): boolean => JSON.stringify(obj) === '{\}';
+// Similar: const isEmpty = (obj: object): boolean => JSON.stringify(obj) === '\{}';
 endsnippet
 
 snippet onelocisValidDate "Validate a Gregorian date"
